@@ -29,5 +29,3 @@ Automatizar o controle de frequência, reduzir esquecimentos e oferecer um hist�
 ## Protótipo inicial
 
 O protótipo poderá utilizar Arduino ou ESP32, teclado numérico, display e servo motor para representar a abertura da porta. A impressão digital poderá ser adicionada futuramente.
-**Disciplina:** Projeto Integrador II
-**Ano:** 2026
