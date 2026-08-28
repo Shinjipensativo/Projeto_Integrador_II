@@ -136,12 +136,9 @@ A primeira versão será demonstrada em uma maquete e deverá validar a matrícu
 ## 9. Equipe
 
 - Fredy Gomes Martins;
-- **[Integrante 2]**;
-- **[Integrante 3]**.
 
 ---
 
-**Versão:** 1.0  
-**Disciplina:** Projeto Integrador II  
-**Professor:** Clécio Sousa  
+**Projeto:** AcessoLab
+**Versão:** 1.0
 **Ano:** 2026
