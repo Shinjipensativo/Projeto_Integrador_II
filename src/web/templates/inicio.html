@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block titulo %}Painel - AcessoLab{% endblock %}
+{% block conteudo %}
+<section class="cabecalho-pagina">
+    <div>
+        <p class="destaque">Controle de acesso</p>
+        <h1>Painel do laboratório</h1>
+        <p>Cadastre alunos e registre entradas e saídas usando a matrícula.</p>
+    </div>
+    <form class="registro" action="{{ url_for('registrar') }}" method="post">
+        <label for="laboratorio">Laboratório</label>
+        <select id="laboratorio" name="laboratorio" required>
+            <option value="" selected disabled>Selecione o laboratório</option>
+            {% for laboratorio in laboratorios %}
+                <option value="{{ laboratorio }}">{{ laboratorio }}</option>
+            {% endfor %}
+        </select>
+        <label for="matricula">Matrícula</label>
+        <div class="linha-formulario">
+            <input id="matricula" name="matricula" inputmode="numeric" required placeholder="Digite a matrícula">
+            <button type="submit">Registrar acesso</button>
+        </div>
+    </form>
+</section>
+
+{% if simulacao %}
+<section class="simulacao {{ 'autorizada' if simulacao.autorizado else 'negada' }}" aria-live="polite">
+    <div class="porta-cenario">
+        <div class="porta {{ 'aberta' if simulacao.autorizado else 'fechada' }}">
+            <span class="macaneta"></span>
+        </div>
+    </div>
+    <div>
+        <p class="destaque">Simulação virtual</p>
+        <h2>{{ 'Porta aberta' if simulacao.autorizado else 'Porta bloqueada' }}</h2>
+        <p>{{ simulacao.mensagem }}</p>
+        <p><strong>Laboratório:</strong> {{ simulacao.laboratorio }}</p>
+        <span class="indicador {{ 'verde' if simulacao.autorizado else 'vermelho' }}">
+            {{ 'Acesso autorizado' if simulacao.autorizado else 'Acesso negado' }}
+        </span>
+    </div>
+</section>
+{% endif %}
+
+<section class="cards">
+    <article><span>Alunos ativos</span><strong>{{ total_alunos }}</strong></article>
+    <article><span>Presentes agora</span><strong>{{ presentes|length }}</strong></article>
+    <article><span>Acessos autorizados</span><strong>{{ total_acessos }}</strong></article>
+</section>
+
+<section class="grade">
+    <article class="painel">
+        <h2>Presentes no laboratório</h2>
+        {% if presentes %}
+        <table>
+            <thead><tr><th>Nome</th><th>Matrícula</th><th>Turma</th><th>Laboratório</th></tr></thead>
+            <tbody>
+            {% for aluno in presentes %}
+                <tr><td>{{ aluno.nome }}</td><td>{{ aluno.matricula }}</td><td>{{ aluno.turma }}</td><td>{{ aluno.laboratorio or '-' }}</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p class="vazio">Nenhum aluno presente.</p>
+        {% endif %}
+    </article>
+
+    <article class="painel">
+        <h2>Movimentações recentes</h2>
+        {% if recentes %}
+        <div class="lista">
+        {% for acesso in recentes %}
+            <div>
+                <span><strong>{{ acesso.nome or acesso.matricula_informada }}</strong><br>{{ acesso.laboratorio or 'Laboratório não informado' }} · {{ acesso.data_hora }}</span>
+                <span class="selo {{ acesso.resultado|lower }}">{{ acesso.tipo or acesso.resultado }}</span>
+            </div>
+        {% endfor %}
+        </div>
+        {% else %}
+            <p class="vazio">Nenhum acesso registrado.</p>
+        {% endif %}
+    </article>
+</section>
+{% endblock %}

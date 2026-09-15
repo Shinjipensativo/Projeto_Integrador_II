@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block titulo %}Histórico - AcessoLab{% endblock %}
+{% block conteudo %}
+<section class="cabecalho-pagina simples">
+    <div><p class="destaque">Registros</p><h1>Histórico de acessos</h1></div>
+    <form class="busca" method="get">
+        <input name="busca" value="{{ busca }}" placeholder="Nome, matrícula ou laboratório">
+        <button type="submit">Pesquisar</button>
+    </form>
+</section>
+
+<article class="painel">
+    {% if registros %}
+    <table>
+        <thead><tr><th>Aluno</th><th>Matrícula</th><th>Turma</th><th>Laboratório</th><th>Data e hora</th><th>Movimentação</th><th>Resultado</th></tr></thead>
+        <tbody>
+        {% for acesso in registros %}
+            <tr>
+                <td>{{ acesso.nome or 'Não identificado' }}</td>
+                <td>{{ acesso.matricula_informada }}</td>
+                <td>{{ acesso.turma or '-' }}</td>
+                <td>{{ acesso.laboratorio or '-' }}</td>
+                <td>{{ acesso.data_hora }}</td>
+                <td>{{ acesso.tipo or '-' }}</td>
+                <td><span class="selo {{ acesso.resultado|lower }}">{{ acesso.resultado }}</span></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}<p class="vazio">Nenhum registro encontrado.</p>{% endif %}
+</article>
+{% endblock %}

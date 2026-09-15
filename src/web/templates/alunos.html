@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block titulo %}Alunos - AcessoLab{% endblock %}
+{% block conteudo %}
+<section class="cabecalho-pagina simples">
+    <div>
+        <p class="destaque">Administração</p>
+        <h1>Cadastro de alunos</h1>
+    </div>
+</section>
+
+<section class="grade alunos-grade">
+    <article class="painel">
+        <h2>Novo aluno</h2>
+        <form class="formulario" method="post">
+            <label>Nome completo<input name="nome" required></label>
+            <label>Matrícula<input name="matricula" required></label>
+            <label>Turma<input name="turma" required placeholder="Ex.: 3º ano B"></label>
+            <button type="submit">Cadastrar aluno</button>
+        </form>
+    </article>
+
+    <article class="painel">
+        <h2>Alunos cadastrados</h2>
+        {% if alunos %}
+        <table>
+            <thead><tr><th>Nome</th><th>Matrícula</th><th>Turma</th><th>Situação</th><th></th></tr></thead>
+            <tbody>
+            {% for aluno in alunos %}
+                <tr>
+                    <td>{{ aluno.nome }}</td><td>{{ aluno.matricula }}</td><td>{{ aluno.turma }}</td>
+                    <td><span class="selo {{ 'autorizado' if aluno.ativo else 'negado' }}">{{ 'Ativo' if aluno.ativo else 'Inativo' }}</span></td>
+                    <td>
+                        <form action="{{ url_for('alterar_status', aluno_id=aluno.id) }}" method="post">
+                            <button class="secundario" type="submit">{{ 'Desativar' if aluno.ativo else 'Ativar' }}</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}<p class="vazio">Nenhum aluno cadastrado.</p>{% endif %}
+    </article>
+</section>
+{% endblock %}
