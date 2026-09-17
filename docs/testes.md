@@ -32,22 +32,29 @@ Validar o funcionamento do protótipo virtual do AcessoLab, incluindo cadastro, 
 
 ## 4. Evidências
 
-Crie a pasta `docs/evidencias` e adicione, por exemplo:
+### Cadastro do aluno
 
-- `01-cadastro-aluno.png`;
-- `02-acesso-autorizado.png`;
-- `03-acesso-negado.png`;
-- `04-historico.png`;
-- `05-selecao-laboratorio.png`.
-
-Depois, insira as imagens abaixo:
-
-```markdown
 ![Cadastro do aluno](evidencias/01-cadastro-aluno.png)
+
+### Acesso autorizado
+
 ![Acesso autorizado](evidencias/02-acesso-autorizado.png)
+
+### Saída registrada
+
+![Saída registrada](evidencias/02b-saida-registrada.png)
+
+### Acesso negado
+
 ![Acesso negado](evidencias/03-acesso-negado.png)
-![Histórico](evidencias/04-historico.png)
-```
+
+### Histórico de acessos
+
+![Histórico de acessos](evidencias/04-historico.png)
+
+### Registros dos laboratórios
+
+![Registros dos laboratórios](evidencias/05-historico-completo.png)
 
 ## 5. Validação com usuário
 **Pessoa que realizou o teste:** Colega de turma
